@@ -12,8 +12,8 @@ docker compose up -d
 ```
 |container|port|
 |-|-|
-|nginxコンテナ|localhost:10090|
-|phpMyAdminコンテナ|localhost:10099|
+|nginxコンテナ|localhost:8080|
+|phpMyAdminコンテナ|localhost:8089|
 |MailHog|localhost:8025|
 
 ユーザ名: root  
@@ -21,25 +21,31 @@ docker compose up -d
 
 ## 3. Laravelプロジェクトの構築
 ### 新規プロジェクトを構築する場合
-```
+```bash
 docker compose exec app composer create-project --prefer-dist "laravel/laravel=" .
+docker compose exec app cp .env.example .env
+```
+JetStreamとInertiaを利用する場合は以下のコマンドを入力
+```bash
+docker compose exec app composer require laravel/jetstream
+docker compose exec app php artisan jetstream:install inertia
+npm --prefix ./src install ./src
 ```
 ### 既存プロジェクトを利用する場合
 ```bash
 git clone <URL> src
+docker compose exec app cp .env.example .env
 ```
-
-## 5. パッケージインストール
+パッケージ類のインストール
 ```bash
 docker compose exec app composer install
 ```
 ```bash
-docker compose exec app npm install
+npm --prefix ./src install ./src
 ```
 
 ## 6. Laravelの初期設定
 ```bash
-docker compose exec app cp .env.example .env
 docker compose exec app php artisan key:generate
 docker compose exec app php artisan storage:link
 docker compose exec app chmod -R 777 storage bootstrap/cache
@@ -74,25 +80,34 @@ docker compose exec app php artisan db:seed
 
 ## 開発用サーバー起動
 ```bash
-docker compose exec app npm run dev
+cd src
+npm run dev
 ```
 
 
 # ディレクトリ構成
-```
+```bash
 ├── docker
-│   ├── db  << MySQLコンテナ設定用
+│   ├── db  # MySQLコンテナ設定用
 │   │   ├── Dockerfile
 │   │   ├── data
 │   │   └── my.conf
-│   ├── php << phpコンテナ設定用
+│   ├── php # phpコンテナ設定用
 │   │   ├── Dockerfile
 │   │   └── php.ini
-│   └── web << nginxコンテナ設定用
+│   └── web # nginxコンテナ設定用
 │       ├── Dockerfile
 │       └── default.conf
 │
+├── Makefile
 ├── docker-compose.yml
-└── src << Laravelのソースがここに入る
+└── src # Laravelのソースコードがここに入る
 ```
 
+# Tips
+## Dockerコンテナ上でnode.js環境を構築したい場合
+[phpコンテナのDockerfile](./docker/php/Dockerfile) 33行目のコメントアウトを外してください。  
+下記コマンドでnode.jsを実行できるようになります。
+```bash
+docker compose exec app node
+```

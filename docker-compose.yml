@@ -6,7 +6,7 @@ services:
     build:
       dockerfile: "./docker/web/Dockerfile"
     ports:
-      - "10090:80"
+      - "8080:80"
     volumes:
       - "./src:/var/www/html"
 
@@ -38,7 +38,7 @@ services:
     depends_on:
       - db
     ports:
-      - 10099:80
+      - 8089:80
 
   mail:
     image: mailhog/mailhog
