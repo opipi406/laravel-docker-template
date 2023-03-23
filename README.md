@@ -10,11 +10,11 @@ git clone https://github.com/opipi406/laravel-docker-template.git <プロジェ�
 ```bash
 docker compose up -d
 ```
-|container|port|
-|-|-|
-|nginxコンテナ|localhost:8080|
-|phpMyAdminコンテナ|localhost:8089|
-|MailHog|localhost:8025|
+| container          | port           |
+| ------------------ | -------------- |
+| nginxコンテナ      | localhost:8080 |
+| phpMyAdminコンテナ | localhost:8089 |
+| MailHog            | localhost:8025 |
 
 ユーザ名: root  
 パスワード: qweqwe  
@@ -49,7 +49,7 @@ npm install
 ```bash
 docker compose exec app php artisan key:generate
 docker compose exec app php artisan storage:link
-docker compose exec app chmod -R 777 storage bootstrap/cache
+#docker compose exec app chmod -R 777 storage bootstrap/cache
 ```
 
 ## DB環境変数を修正
@@ -77,6 +77,21 @@ docker compose exec app php artisan migrate:fresh
 ```
 ```bash
 docker compose exec app php artisan db:seed
+```
+
+## その他
+### .gitignoreの追記
+```
+echo >> src/.gitignore
+echo .htaccess >> src/.gitignore
+echo Makefile >> src/.gitignore
+echo /storage >> src/.gitignore
+echo /config >> src/.gitignore
+```
+
+### Laravelプロジェクト用Makefileの追加
+```
+cp Makefile-laravel src/Makefile
 ```
 
 ## 開発用サーバー起動

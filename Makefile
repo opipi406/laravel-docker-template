@@ -23,7 +23,7 @@ build:
 destroy:
 	docker compose down --rmi all --volumes --remove-orphans
 
-# MySQLへ接続
+# Connection MySQL
 sql:
 	docker compose exec db bash -c 'mysql -u user -pqweqwe laravel'
 
