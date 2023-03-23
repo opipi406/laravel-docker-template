@@ -52,7 +52,6 @@ echo >> src/.gitignore
 echo .htaccess >> src/.gitignore
 echo Makefile >> src/.gitignore
 echo /storage >> src/.gitignore
-echo /config >> src/.gitignore
 echo >> src/.gitignore
 echo public/phpMyAdmin/ >> src/.gitignore
 echo public/phpMyAdmin* >> src/.gitignore
