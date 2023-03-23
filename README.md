@@ -45,8 +45,24 @@ cd src
 npm install
 ```
 
+## 初回セットアップ
+```bash
+# gitignoreの追記
+echo >> src/.gitignore
+echo .htaccess >> src/.gitignore
+echo Makefile >> src/.gitignore
+echo /storage >> src/.gitignore
+echo /config >> src/.gitignore
+echo >> src/.gitignore
+echo public/phpMyAdmin/ >> src/.gitignore
+echo public/phpMyAdmin* >> src/.gitignore
+# Laravelプロジェクト用Makefileの追加
+cp Makefile-laravel src/Makefile
+```
+
 ## Laravelの初期設定
 ```bash
+docker compose exec app cp .env.example .env
 docker compose exec app php artisan key:generate
 docker compose exec app php artisan storage:link
 #docker compose exec app chmod -R 777 storage bootstrap/cache
@@ -77,21 +93,6 @@ docker compose exec app php artisan migrate:fresh
 ```
 ```bash
 docker compose exec app php artisan db:seed
-```
-
-## その他
-### .gitignoreの追記
-```
-echo >> src/.gitignore
-echo .htaccess >> src/.gitignore
-echo Makefile >> src/.gitignore
-echo /storage >> src/.gitignore
-echo /config >> src/.gitignore
-```
-
-### Laravelプロジェクト用Makefileの追加
-```
-cp Makefile-laravel src/Makefile
 ```
 
 ## 開発用サーバー起動
