@@ -48,15 +48,16 @@ npm install
 ## 初回セットアップ
 ```bash
 # gitignoreの追記
-echo >> src/.gitignore
-echo .htaccess >> src/.gitignore
-echo Makefile >> src/.gitignore
-echo /storage >> src/.gitignore
-echo >> src/.gitignore
-echo public/phpMyAdmin/ >> src/.gitignore
-echo public/phpMyAdmin* >> src/.gitignore
+echo >> src/.gitignore \
+  && echo .htaccess >> src/.gitignore \
+  && echo Makefile >> src/.gitignore \
+  && echo /storage >> src/.gitignore \
+  && echo >> src/.gitignore \
+  && echo public/phpMyAdmin/ >> src/.gitignore \
+  && echo public/phpMyAdmin\* >> src/.gitignore
 # Laravelプロジェクト用Makefileの追加
-cp Makefile-laravel src/Makefile
+cp Makefile-laravel src/Makefile \
+  && cp deploy.sh src/deploy.sh
 ```
 
 ## Laravelの初期設定

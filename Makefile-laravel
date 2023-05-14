@@ -18,11 +18,3 @@ fresh:
 
 tinker:
 	docker compose exec app php artisan tinker
-
-# Deployment
-deploy:
-	git checkout main
-	git fetch origin main
-	git pull origin main
-	npm run build
-	php artisan migration
