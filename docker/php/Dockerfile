@@ -30,6 +30,8 @@ RUN docker-php-ext-install \
   iconv \
   exif
 
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
 # node.js
 # RUN apt-get install -y nodejs npm
 # RUN npm install n -g 
