@@ -26,8 +26,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: qweqwe
       MYSQL_DATABASE: laravel
-      MYSQL_USER: user
-      MYSQL_PASSWORD: qweqwe
     volumes:
       - ./docker/db/data:/var/lib/mysql
 
@@ -35,18 +33,17 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     # platform: linux/amd64
     container_name: phpmyadmin
-    depends_on:
-      - db
     ports:
       - 8089:80
-
-  mail:
-    image: mailhog/mailhog
-    container_name: mailhog
-    ports:
-      - "8025:8025"
     environment:
-      MH_STORAGE: maildir
-      MH_MAILDIR_PATH: /tmp
-    # volumes:
-    #   - ./maildir:/tmp
+      PMA_USER: root
+      PMA_PASSWORD: qweqwe
+      PMA_HOST: db
+    depends_on:
+      - db
+
+  mailpit:
+    image: "axllent/mailpit:latest"
+    ports:
+      - "1025:1025"
+      - "8025:8025"
