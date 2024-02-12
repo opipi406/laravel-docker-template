@@ -96,7 +96,7 @@ echo -n "${WATER}?${NC} ${YELLOW}npm ci${NC} を実行しますか? ${GRAY}[y/N]
 read -r ANSWER
 if [ "$ANSWER" = "y" ]; then
     node -v
-    # npm ci
+    npm ci
 fi
 if [ $? = 1 ]; then
     echo "{$RED}[ERROR] npm ciに失敗しました{$NC}"
@@ -107,7 +107,7 @@ echo -n "${WATER}?${NC} ${YELLOW}composer update${NC} を実行しますか? ${G
 read -r ANSWER
 if [ "$ANSWER" = "y" ]; then
     composer --version
-    # composer update
+    composer update
 fi
 if [ $? = 1 ]; then
     echo "{$RED}[ERROR] composer updateに失敗しました{$NC}"
@@ -116,7 +116,7 @@ fi
 
 echo
 echo "${BLUE}=== Start build...${NC}"
-# npm run build
+npm run build
 if [ $? = 1 ]; then
     echo "{$RED}[ERROR] ビルドに失敗しました{$NC}"
     exit 1
